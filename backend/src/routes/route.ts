@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { getInventory, setInventoryItems } from "./inventory";
+import { addInventoryItems, getInventory, removeInventoryItems, setInventoryItems } from "./inventory";
 import { createUser, getAllUsers, getUser } from "./user";
 
 export interface Route {
@@ -14,4 +14,6 @@ export const routes = [
 	createUser,
 	getInventory,
 	setInventoryItems,
+	addInventoryItems,
+	removeInventoryItems
 ];

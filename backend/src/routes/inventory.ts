@@ -13,34 +13,34 @@ export const getInventory: Route = {
 };
 
 export const setInventoryItems: Route = {
-	route: "/inventory/:id/items",
-	method: "put",
+	route: "/inventory/:id/set-items",
+	method: "post",
 	handler: async (req, res) => {
 		const id = req.params.id;
-		const items: Item[] = req.body;
+		const items: Item[] = req.body.itemNames;
 		await DataStoreService.instance.setInventoryItems(id, items);
 		res.status(200).send();
 	},
 };
 
 export const addInventoryItems: Route = {
-	route: "/inventory/:id/items",
+	route: "/inventory/:id/add-items",
 	method: "put",
 	handler: async (req, res) => {
 		const id = req.params.id;
-		const item: string = req.body;
-		await DataStoreService.instance.addInventoryItems(id, item);
+		const items: string[] = req.body.itemNames;
+		await DataStoreService.instance.addInventoryItems(id, items);
 		res.status(200).send();
 	},
 };
 
 export const removeInventoryItems: Route = {
-	route: "/inventory/:id/items",
+	route: "/inventory/:id/remove-items",
 	method: "put",
 	handler: async (req, res) => {
 		const id = req.params.id;
-		const item: string = req.body;
-		await DataStoreService.instance.removeInventoryItems(id, item);
+		const items: string[] = req.body.itemNames;
+		await DataStoreService.instance.removeInventoryItems(id, items);
 		res.status(200).send();
 	},
 };
