@@ -7,6 +7,8 @@ import 'package:inventory/pages/util/wait.dart';
 import 'package:inventory/services/api.dart';
 import 'package:inventory/widgets/common/circle_image_picker.dart';
 
+import 'InventoryTest.dart';
+
 class SetupScreen extends StatefulWidget {
   final String uid;
   final String email;
@@ -111,7 +113,7 @@ class _SetupScreenState extends State<SetupScreen> {
                           Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => const Placeholder(),
+                              builder: (context) => const Test(),
                             ),
                           );
                         },

@@ -3,6 +3,7 @@
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:inventory/pages/inventoryTest.dart';
 import 'package:inventory/pages/onboarding.dart';
 import 'package:inventory/services/user.dart';
 import 'package:image_picker_android/image_picker_android.dart';
@@ -42,7 +43,7 @@ class MainApp extends StatelessWidget {
           colorScheme: dark,
           useMaterial3: true,
         ),
-        home: const Onboarding(),
+        home: const Test(),
       ),
     );
   }
