@@ -1,21 +1,44 @@
 import 'package:flutter/material.dart';
 
-class InventoryRowInput extends StatelessWidget {
-  final TextEditingController textEditingController;
-  final ValueChanged<String>? onTextChanged;
-  final VoidCallback? onMinusPressed;
-  final TextEditingController numberEditingController;
-  final ValueChanged<String>? onNumberChanged;
-  final VoidCallback? onPlusPressed;
+typedef NameCallback = void Function(String);
+typedef AmountCallback = void Function(String);
 
-  const InventoryRowInput({
-    required this.textEditingController,
-    this.onTextChanged,
-    this.onMinusPressed,
-    required this.numberEditingController,
-    this.onNumberChanged,
-    this.onPlusPressed,
-  });
+class InventoryRowInput extends StatelessWidget {
+  final TextEditingController textEditingController = TextEditingController();
+  final TextEditingController numberEditingController = TextEditingController();
+  final void Function(String) updateName;
+  final void Function(int) updateAmount;
+  
+  void onNameChanged(value){
+    updateName(value);
+  }
+
+  void onAmountChanged(value) {
+    updateAmount(int.parse(value));
+  }
+
+  void onMinusPressed() {
+    int num = int.parse(numberEditingController.text);
+    num--;
+    numberEditingController.text = num.toString();
+    updateAmount(num);
+  }
+
+  void onPlusPressed() {
+    int num = int.parse(numberEditingController.text);
+    num++;
+    numberEditingController.text = num.toString();
+    updateAmount(num);
+  }
+
+  InventoryRowInput({
+    required this.updateName,
+    required this.updateAmount,
+    super.key
+  }) {
+    int num = 0;
+    numberEditingController.text = num.toString();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +48,7 @@ class InventoryRowInput extends StatelessWidget {
           width: 200,
           child: TextField(
             controller: textEditingController,
-            onChanged: onTextChanged,
+            onChanged: onNameChanged,
             decoration: const InputDecoration(
               hintText: '    Enter text 1',
             ),
@@ -43,7 +66,7 @@ class InventoryRowInput extends StatelessWidget {
           child: TextField(
             controller: numberEditingController,
             keyboardType: TextInputType.number,
-            onChanged: onNumberChanged,
+            onChanged: onAmountChanged,
             decoration: const InputDecoration(
               hintText: '0',
             ),
