@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:inventory/pages/signin.dart';
 import 'package:inventory/pages/signup.dart';
+import 'package:inventory/pages/inventory_hl.dart';
 
 class Onboarding extends StatelessWidget {
   const Onboarding({super.key});
@@ -51,6 +52,23 @@ class Onboarding extends StatelessWidget {
                       );
                     },
                     child: const Text("Sign up"),
+                  ),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                Expanded(
+                  child: FilledButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const InventoryPage(),
+                        ),
+                      );
+                    },
+                    child: const Text("Inventory Test"),
                   ),
                 ),
               ],
