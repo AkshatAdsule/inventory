@@ -9,27 +9,15 @@ class InventoryPage extends StatefulWidget {
   State<InventoryPage> createState() => _InventoryPageState();
 }
 
-
-class Items {
-  String name = "";
-  int amount = 0;
-
-  void changeName(String newName) {
-    name = newName;
-  }
-
-  void changeAmount(int newAmount) {
-    amount = newAmount;
-  }
-}
-
 class _InventoryPageState extends State<InventoryPage> {
   List<InventoryRowInput> inputFields = [];
-  List<Items> itemList = [
-    Items()
-      ..name = ""
-      ..amount = 0,
-  ];
+
+  void onListSubmmit(List<Items> itemList){
+    print("called\n");
+    for (int i =0; i < itemList.length; i++) {
+      print(itemList[i].name);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -47,22 +35,7 @@ class _InventoryPageState extends State<InventoryPage> {
               style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16.0),
-            // Column(
-            //   children: List.generate(
-            //     2,
-            //     (index) => InventoryRowInput(
-            //         updateAmount: itemList[0].changeAmount,
-            //         updateName: itemList[0].changeName),
-            //   ),
-            // ),
-            const DynamicInventoryList(),
-            const SizedBox(height: 16.0),
-            ElevatedButton(
-              onPressed: () {
-                // Handle submit button press
-              },
-              child: const Text('Submit'),
-            )
+            Expanded(child: DynamicInventoryList(onSubmit: onListSubmmit)),
           ],
         ),
       ),

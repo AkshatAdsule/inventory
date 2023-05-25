@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import './InventoryRowInput.dart';
 
 class DynamicInventoryList extends StatefulWidget {
-  const DynamicInventoryList({super.key});
+  final void Function(List<Items>) onSubmit;
+  const DynamicInventoryList({required this.onSubmit, super.key});
+  
   @override
-  _DynamicInventoryListState createState() => _DynamicInventoryListState();
+  DynamicInventoryListState createState() => DynamicInventoryListState(onSubmit: onSubmit);
 }
 
 class Items {
@@ -20,7 +22,8 @@ class Items {
   }
 }
 
-class _DynamicInventoryListState extends State<DynamicInventoryList> {
+class DynamicInventoryListState extends State<DynamicInventoryList> {
+  final void Function(List<Items>) onSubmit;
   List<Items> itemList = [
     Items()
       ..name = ""
@@ -35,18 +38,22 @@ class _DynamicInventoryListState extends State<DynamicInventoryList> {
     });
   }
 
+  DynamicInventoryListState({required this.onSubmit});
+  
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16.0), 
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
-          Column(
-            children: List.generate(
-              itemList.length,
-              (index) => InventoryRowInput(
-                  updateAmount: itemList[index].changeAmount,
-                  updateName: itemList[index].changeName),
+          Expanded(
+            child: ListView(
+              children: List.generate(
+                itemList.length,
+                (index) => InventoryRowInput(
+                    updateAmount: itemList[index].changeAmount,
+                    updateName: itemList[index].changeName),
+              ),
             ),
           ),
           ElevatedButton(
@@ -55,6 +62,13 @@ class _DynamicInventoryListState extends State<DynamicInventoryList> {
             },
             child: const Text('Add Item'),
           ),
+          const SizedBox(height: 16.0),
+          ElevatedButton(
+            onPressed: () {
+              onSubmit(itemList);
+            },
+            child: const Text('Submit'),
+          )
         ],
       ),
     );

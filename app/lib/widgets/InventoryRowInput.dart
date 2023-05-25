@@ -9,6 +9,8 @@ class InventoryRowInput extends StatelessWidget {
   final void Function(String) updateName;
   final void Function(int) updateAmount;
   
+  
+  // event handdler function
   void onNameChanged(value){
     updateName(value);
   }
@@ -31,6 +33,7 @@ class InventoryRowInput extends StatelessWidget {
     updateAmount(num);
   }
 
+  // constructor
   InventoryRowInput({
     required this.updateName,
     required this.updateAmount,
@@ -40,6 +43,8 @@ class InventoryRowInput extends StatelessWidget {
     numberEditingController.text = num.toString();
   }
 
+
+  // return/build body
   @override
   Widget build(BuildContext context) {
     return Row(
