@@ -38,9 +38,9 @@ class InventoryRowInput extends StatelessWidget {
     required this.updateName,
     required this.updateAmount,
     super.key
-  }) {
-    int num = 0;
-    numberEditingController.text = num.toString();
+  }) (String name, int amount){
+    textEditingController.text = name;
+    numberEditingController.text = amount.toString();
   }
 
 
