@@ -37,8 +37,10 @@ class InventoryRowInput extends StatelessWidget {
   InventoryRowInput({
     required this.updateName,
     required this.updateAmount,
-    super.key
-  }) (String name, int amount){
+    super.key,
+    required String name,
+    required int amount,
+  }){
     textEditingController.text = name;
     numberEditingController.text = amount.toString();
   }
@@ -55,7 +57,7 @@ class InventoryRowInput extends StatelessWidget {
             controller: textEditingController,
             onChanged: onNameChanged,
             decoration: const InputDecoration(
-              hintText: '    Enter text 1',
+              hintText: '    Enter Item Name',
             ),
           ),
         ),
@@ -67,8 +69,9 @@ class InventoryRowInput extends StatelessWidget {
           child: const Text('-'),
         ),
         SizedBox(
-          width: 10,
+          width: 30,
           child: TextField(
+            textAlign: TextAlign.center,
             controller: numberEditingController,
             keyboardType: TextInputType.number,
             onChanged: onAmountChanged,

@@ -52,7 +52,12 @@ class DynamicInventoryListState extends State<DynamicInventoryList> {
                 itemList.length,
                 (index) => InventoryRowInput(
                     updateAmount: itemList[index].changeAmount,
-                    updateName: itemList[index].changeName),
+                    updateName: itemList[index].changeName,
+                    name: itemList[index].name,
+                    amount: itemList[index].amount,
+                    ),
+                    
+
               ),
             ),
           ),
