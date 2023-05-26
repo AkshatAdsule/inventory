@@ -6,6 +6,8 @@ import 'package:inventory/pages/onboarding.dart';
 import 'package:inventory/pages/home.dart';
 import 'package:inventory/services/user.dart';
 
+import '../honghui_test.dart';
+
 class AuthGuardScreen extends StatefulWidget {
   const AuthGuardScreen({super.key});
 
@@ -31,7 +33,7 @@ class _AuthGuardScreenState extends State<AuthGuardScreen> {
           if (context.mounted) {
             Navigator.pushReplacement(
               context,
-              MaterialPageRoute(builder: (context) => HomePage()),
+              MaterialPageRoute(builder: (context) =>const InventoryPage()),
             );
           }
         }

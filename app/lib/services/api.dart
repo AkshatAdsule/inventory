@@ -7,10 +7,10 @@ import 'package:inventory/models/user.dart';
 import 'package:inventory/services/user.dart';
 
 class APIService {
-  static const bool _testing = false;
+  static const bool _testing = true;
   static const String _baseUrl = _testing
       // ? 'http://168.150.111.230:8080'
-      ? 'http://192.168.50.146:8080'
+      ? 'https://3f79-168-150-104-213.ngrok-free.app'
       // ? 'http://168.150.60.67:8080'
       : 'https://inventory-paradise.wl.r.appspot.com';
   static APIService? _instance;
@@ -53,5 +53,29 @@ class APIService {
       List<dynamic> json = jsonDecode(res.body);
       return json.map((e) => Household.fromJson(e)).toList();
     });
+  }
+
+    Future<void> addItems(String uid, List<String> itemList) async {
+    String url =
+        '$_baseUrl/inventory/$uid/add-items'; // this is the route specified in backend/routes/inventory
+    await put(
+      Uri.parse(url),
+      body: jsonEncode({"itemList": itemList}),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+  }
+
+  Future<void> removeItems(String uid, List<String> itemList) async {
+    String url =
+        '$_baseUrl/inventory/$uid/remove-items'; // this is the route specified in backend/routes/inventory
+    await put(
+      Uri.parse(url),
+      body: jsonEncode({"itemList": itemList}),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
   }
 }
