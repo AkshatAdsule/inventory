@@ -8,6 +8,7 @@ class InventoryRowInput extends StatelessWidget {
   final TextEditingController numberEditingController = TextEditingController();
   final void Function(String) updateName;
   final void Function(int) updateAmount;
+  final void Function(String) removeItem;
   
   
   // event handdler function
@@ -33,10 +34,15 @@ class InventoryRowInput extends StatelessWidget {
     updateAmount(num);
   }
 
+  void onDeletePressed(value) {
+    removeItem(value);
+  }
+
   // constructor
   InventoryRowInput({
     required this.updateName,
     required this.updateAmount,
+    required this.removeItem,
     super.key,
     required String name,
     required int amount,

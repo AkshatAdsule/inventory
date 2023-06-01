@@ -22,6 +22,10 @@ class Items {
   }
 }
 
+void removeItem(String name) {
+
+}
+
 class DynamicInventoryListState extends State<DynamicInventoryList> {
   final void Function(List<Items>) onSubmit;
   List<Items> itemList = [
@@ -53,6 +57,7 @@ class DynamicInventoryListState extends State<DynamicInventoryList> {
                 (index) => InventoryRowInput(
                     updateAmount: itemList[index].changeAmount,
                     updateName: itemList[index].changeName,
+                    removeItem: removeItem,
                     name: itemList[index].name,
                     amount: itemList[index].amount,
                     ),
