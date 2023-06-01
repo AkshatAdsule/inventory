@@ -58,11 +58,6 @@ class InventoryRowInput extends StatelessWidget {
           },
           child: const Text('+'),
         ),
-        Expanded(child: Container()),
-        ElevatedButton(
-          onPressed: () {},
-          child: const Text('Remove Entry'),
-        ),
       ],
     );
   }

@@ -36,19 +36,29 @@ class _InventoryPageState extends State<InventoryPage> {
                         TextEditingController num = TextEditingController();
                         inputFields.add(InventoryRowInput(
                             textEditingController: txt,
-                            quantity:1,
+                            quantity: 1,
                             numberEditingController: num));
                       })
                     },
                 child: const Text("Add Item")),
-
             Expanded(
               child: ListView.builder(
                 itemCount: inputFields.length,
                 itemBuilder: (context, index) => inputFields[index],
               ),
             ),
-
+            const SizedBox(height: 16.0),
+            ElevatedButton(
+                onPressed: () => {
+                      if (inputFields.isNotEmpty)
+                        {
+                          setState(() {
+                            inputFields
+                                .remove(inputFields[inputFields.length - 1]);
+                          })
+                        }
+                    },
+                child: const Text("Remove one entry")),
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
