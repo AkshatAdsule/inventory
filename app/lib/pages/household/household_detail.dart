@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:inventory/models/household.dart';
 import 'package:inventory/models/user.dart';
 import 'package:inventory/pages/add_houshold/add_members.dart';
+import 'package:inventory/pages/honghui_test.dart';
 import 'package:inventory/pages/household/inventory_detail.dart';
 import 'package:inventory/pages/settings/settings.dart';
 import 'package:inventory/services/api.dart';
@@ -57,7 +58,7 @@ class _HouseholdPageState extends State<HouseholdPage> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => InventoryDetail(
+                    builder: (context) => InventoryPage(
                       inventoryId: widget.household.inventory,
                     ),
                   ),

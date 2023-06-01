@@ -242,4 +242,76 @@ export class DataStoreService {
 			])
 		);
 	}
+	
+	public async addInventoryItems(
+		id: string,
+		itemNames: string[]
+	): Promise<void> {
+		var inventory = await this.getInventory(id);
+		console.log(inventory);
+		console.log(itemNames)
+
+		var currentItem;
+		var hasItem = false;
+
+		for (const itemName of itemNames) {
+			hasItem = false;
+			for (let i = 0; i < inventory.items.length; i++) {
+				currentItem = inventory.items[i];
+				if (currentItem.name == itemName) {
+					inventory.items[i].quantity++;
+					hasItem = true;
+				}
+			}
+
+			if (!hasItem) {
+				currentItem = {
+					name: itemName,
+					quantity: 1,
+					tags: [],
+				};
+				inventory.items.push(currentItem);
+			}
+		}
+
+		await this.datastore.save({
+			key: this.datastore.key(["Inventory", this.datastore.int(id)]),
+			data: inventory,
+		});
+	}
+
+	// remove function for Inventory management
+	public async removeInventoryItems(
+		id: string,
+		itemNames: string[]
+	): Promise<void> {
+		var inventory = await this.getInventory(id);
+
+		var currentItem;
+		// var hasItem = false;
+
+		for (const itemName of itemNames) {
+			for (let i = 0; i < inventory.items.length; i++) {
+				currentItem = inventory.items[i];
+				if (currentItem.name == itemName) {
+					inventory.items[i].quantity--;
+					if (inventory.items[i].quantity == 0) {
+						// remove empty item
+						inventory.items.splice(i, 1);
+					}
+				}
+			}
+
+			// if (!hasItem) {
+			// 	// removing a item taht doesn't exit
+			// 	// Do we need error msg or is fine?
+			// }
+			// hasItem = false;
+		}
+
+		await this.datastore.save({
+			key: this.datastore.key(["Inventory", this.datastore.int(id)]),
+			data: inventory,
+		});
+	}
 }

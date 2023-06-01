@@ -14,7 +14,7 @@ class APIService {
   static const bool _testing = true;
   static const String _baseUrl = _testing
       // ? 'http://168.150.111.230:8080'
-      ? "https://9a15-168-150-41-234.ngrok-free.app"
+      ? "https://9205-168-150-52-254.ngrok-free.app"
       // ? 'http://168.150.60.67:8080'
       : 'https://inventory-paradise.wl.r.appspot.com';
   static APIService? _instance;
@@ -249,5 +249,28 @@ class APIService {
     Response res = await get(Uri.parse(url));
     print(res.body);
     return Inventory.fromJson(jsonDecode(res.body));
+  }
+    Future<void> addItems(String uid, List<String> itemList) async {
+    String url =
+        '$_baseUrl/inventory/$uid/add-items'; // this is the route specified in backend/routes/inventory
+    await put(
+      Uri.parse(url),
+      body: jsonEncode({"itemList": itemList}),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+  }
+
+  Future<void> removeItems(String uid, List<String> itemList) async {
+    String url =
+        '$_baseUrl/inventory/$uid/remove-items'; // this is the route specified in backend/routes/inventory
+    await put(
+      Uri.parse(url),
+      body: jsonEncode({"itemList": itemList}),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
   }
 }

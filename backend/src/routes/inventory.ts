@@ -22,3 +22,25 @@ export const setInventoryItems: Route = {
 		res.status(200).send();
 	},
 };
+
+export const addInventoryItems: Route = {
+	route: "/inventory/:id/add-items",
+	method: "put",
+	handler: async (req, res) => {
+		const id = req.params.id;
+		const items: string[] = req.body.itemList;
+		await DataStoreService.instance.addInventoryItems(id, items);
+		res.status(200).send();
+	},
+};
+
+export const removeInventoryItems: Route = {
+	route: "/inventory/:id/remove-items",
+	method: "put",
+	handler: async (req, res) => {
+		const id = req.params.id;
+		const items: string[] = req.body.itemNames;
+		await DataStoreService.instance.removeInventoryItems(id, items);
+		res.status(200).send();
+	},
+};
